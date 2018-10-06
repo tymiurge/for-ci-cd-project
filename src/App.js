@@ -1,16 +1,24 @@
 import React, { Component } from 'react'
 import 'semantic-ui-css/semantic.min.css'
-import { Login } from './screens'
+import { Login, Summary } from './screens'
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Link
+} from 'react-router-dom'
 
 class App extends Component {
   render() {
     return (
-      <Login 
-        onSubmit={
-          (login, password) => alert('login = ' + login + ', password = ' + password)
-        } 
-      />
-    );
+      <Router>
+        <Switch>
+          <Route exact path="/" component={Login}/>
+          <Route path="/login" component={Login}/>
+          <Route path="/summary" component={Summary}/>
+        </Switch>
+      </Router>
+    )
   }
 }
 

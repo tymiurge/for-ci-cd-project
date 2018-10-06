@@ -1,11 +1,20 @@
 import React from 'react'
 import { Button, Form, Grid, Header, Message, Segment } from 'semantic-ui-react'
+import PropTypes from 'prop-types'
 
 class Login extends React.Component {
 
   state = {
     login: '',
     password: ''
+  }
+
+  static propTypes = {
+    onSubmit: PropTypes.func
+  }
+
+  static defaultProps = {
+    onSubmit: () => {}
   }
 
   render() {
