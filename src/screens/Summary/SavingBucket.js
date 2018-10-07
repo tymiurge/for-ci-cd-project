@@ -6,9 +6,9 @@ import { warnings } from 'utils'
 class SavingBucket extends React.Component {
 
     static propTypes = {
-        header: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
         meta: PropTypes.string,
-        value: PropTypes.number.isRequired,
+        amount: PropTypes.number.isRequired,
         onRemove: PropTypes.func
     }
 
@@ -18,15 +18,15 @@ class SavingBucket extends React.Component {
     }
 
     render() {
-        const { header, meta, value } = this.props
+        const { name, meta, amount } = this.props
         return (
             <Card style={{width: '15em'}}>
                 <Card.Content style={{height: '10em'}}>
-                    <Card.Header>{header}</Card.Header>
+                    <Card.Header>{name}</Card.Header>
                     <Card.Meta>{meta}</Card.Meta>
                     <Card.Description>
                         <Statistic>
-                            <Statistic.Value>{value}</Statistic.Value>
+                            <Statistic.Value>{amount}</Statistic.Value>
                         </Statistic>
                     </Card.Description>
                 </Card.Content>
