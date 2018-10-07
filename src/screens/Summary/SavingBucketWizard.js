@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Card, Button, Input, Segment } from 'semantic-ui-react'
+import { Form, Card, Button, Input } from 'semantic-ui-react'
 import PropTypes from 'prop-types'
 import { warnings, validation } from 'utils'
 

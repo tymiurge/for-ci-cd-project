@@ -1,9 +1,6 @@
 import React from 'react'
 import {HorizontalBar} from 'react-chartjs-2'
 
-
-
-
 const TotalStats = ({savings, incomes, outcomes}) => {
     const data = {
         labels: ['Savings', 'Incomes', 'Outcomes', ''],
@@ -20,20 +17,6 @@ const TotalStats = ({savings, incomes, outcomes}) => {
         ]
     }
 
-    const options = {	
-    	responsive: false,
-    	scales: {
-    		xAxes: [{
-          		stacked: true,
-        	}],
-
-        	yAxes: [{
-          		ticks: {
-                    stacked: true,
-                	beginAtZero:true
-            	}
-        	}]
-    	}}
     return (
         <div style={{marginRight: '4em'}}>
             <h2>Stats for last 12 months</h2>

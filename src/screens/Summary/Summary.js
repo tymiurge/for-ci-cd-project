@@ -1,5 +1,5 @@
 import React from 'react'
-import { Menu, Icon, Card, Button, Statistic, Container } from 'semantic-ui-react'
+import { Menu, Icon, Card, Button, Container } from 'semantic-ui-react'
 import SavingBucket from './SavingBucket'
 import SavingBucketWizard from './SavingBucketWizard'
 import NoSavingsCard from './NoSavingsCard'

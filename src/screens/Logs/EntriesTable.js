@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table, Button, Icon, Label, Dropdown, Progress } from 'semantic-ui-react'
+import { Table, Icon, Label } from 'semantic-ui-react'
 import MonthStats from './MonthStats'
 import Toolbar from './Toolbar'
 
