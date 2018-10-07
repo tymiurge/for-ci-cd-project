@@ -34,7 +34,7 @@ class Login extends React.Component {
         `}</style>
         <Grid textAlign='center' style={{ height: '100%' }} verticalAlign='middle'>
           <Grid.Column style={{ maxWidth: 450 }}>
-            <Header as='h2' color='teal' textAlign='center'>
+            <Header as='h2' color='blue' textAlign='center'>
               Log-in to your account
             </Header>
             <Form size='large'>
@@ -58,7 +58,7 @@ class Login extends React.Component {
                 />
 
                 <Button
-                  color='teal'
+                  color='blue'
                   fluid 
                   size='large'
                   content='Login'
