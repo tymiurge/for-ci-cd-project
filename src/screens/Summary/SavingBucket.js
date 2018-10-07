@@ -20,8 +20,8 @@ class SavingBucket extends React.Component {
     render() {
         const { header, meta, value } = this.props
         return (
-            <Card>
-                <Card.Content>
+            <Card style={{width: '15em'}}>
+                <Card.Content style={{height: '10em'}}>
                     <Card.Header>{header}</Card.Header>
                     <Card.Meta>{meta}</Card.Meta>
                     <Card.Description>

@@ -1,28 +1,40 @@
 import React from 'react'
 import { Form, Card, Button, Input, Segment } from 'semantic-ui-react'
 import PropTypes from 'prop-types'
-import { warnings } from 'utils'
+import { warnings, validation } from 'utils'
 
 class SavingBucketWizard extends React.Component {
 
     static propTypes = {
-        onConfirm: PropTypes.func,
+        onSubmit: PropTypes.func,
         onCancel: PropTypes.func
     }
 
     static defaultProps = {
-        onConfirm: warnings.notToUse('SavingBucketWizard', 'onConfirm'),
-        onCancel: warnings.notToUse('SavingBucketWizard', 'onCancel')
+        onSubmit: () => warnings.notToUse('SavingBucketWizard', 'onConfirm'),
+        onCancel: () => warnings.notToUse('SavingBucketWizard', 'onCancel')
     }
 
     state = {
         name: '',
         meta: '',
         amount: '',
+        valid: true
     }
 
     onFieldChange = (value, fieldName) => {
         this.setState({...this.state, [fieldName]: value})
+    }
+
+    onSubmit = () => {
+        let valid = this.state.name !== ''
+            && this.state.meta !== ''
+            && validation.strIsNumber(this.state.amount)
+        if (valid) {
+            this.props.onSubmit(this.state)
+        } else {
+            this.setState({...this.state, valid: false})
+        }
     }
 
     render() {
@@ -32,24 +44,27 @@ class SavingBucketWizard extends React.Component {
                     <Form size='mini' >
                         <Form.Field inline>
                             <Input
+                                className={!this.state.valid && this.state.name === '' ? 'error-state' : ''}
                                 placeholder='Storage name'
-                                style={{width: '100%'}}
+                                fluid
                                 value={this.state.name}
                                 onChange={ e => this.onFieldChange(e.target.value, 'name') }
                             />
                         </Form.Field>
                         <Form.Field inline>
                             <Input 
+                                className={!this.state.valid && this.state.meta === '' ? 'error-state' : ''}
                                 placeholder='Storage meta' 
-                                style={{width: '100%'}}
+                                fluid
                                 value={this.state.meta}
                                 onChange={ e => this.onFieldChange(e.target.value, 'meta') }
                             />
                         </Form.Field>
                         <Form.Field inline>
                             <Input 
+                                className={!this.state.valid && !validation.strIsNumber(this.state.amount) ? 'error-state' : ''}
                                 placeholder='Storage amount' 
-                                style={{width: '100%'}}
+                                fluid
                                 value={this.state.amount}
                                 onChange={ e => this.onFieldChange(e.target.value, 'amount') }
                             />
@@ -61,7 +76,7 @@ class SavingBucketWizard extends React.Component {
                         circular
                         icon='check' 
                         color='blue'
-                        onClick={ () => this.props.onSubmit(this.state)}
+                        onClick={ () => this.onSubmit()}
                     />
                     <Button 
                         circular

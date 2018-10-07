@@ -12,3 +12,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.error-state input{
+  border-color: rgb(255, 40, 0) !important;
+}

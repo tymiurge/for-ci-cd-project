@@ -1,12 +1,14 @@
 import React from 'react'
-import { Menu, Icon, Card, Button, Statistic } from 'semantic-ui-react'
+import { Menu, Icon, Card, Button, Statistic, Container } from 'semantic-ui-react'
 import SavingBucket from './SavingBucket'
+import SavingBucketWizard from './SavingBucketWizard'
 
 class Summary extends React.Component {
 
     render() {
         return (
             <div>
+
             <Menu stackable inverted color='blue'>
                 <Menu.Item active='true' >
                     <Icon name='money bill alternate outline' />
@@ -27,34 +29,30 @@ class Summary extends React.Component {
                 </Menu.Item>
             </Menu>
 
-            <Button circular icon='plus' color='blue' />
-
-        
             
+
+            <Container>
+            
+
             <Card.Group>
+                <SavingBucketWizard
+                    onSubmit={({name, meta, amount}) => alert(`name=${name}, meta=${meta}, amount=${amount}`)}
+                />    
+
                 <SavingBucket
                     header={'Bank Account'}
                     meta={'PrivateBank'}
                     value={5000}
                 />
-                <Card>
-      <Card.Content>
-        <Card.Header>Bank account</Card.Header>
-        <Card.Meta>PrivateBank</Card.Meta>
-        <Card.Description>
-        <Statistic>
-    <Statistic.Value>5,550</Statistic.Value>
-  </Statistic>
-        </Card.Description>
-      </Card.Content>
-      <Card.Content extra>
-        <Button circular icon='settings' />
-        <Button circular icon='settings' />
-      </Card.Content>
-    </Card>
-    </Card.Group>
+      
+      
+            </Card.Group>
 
             
+
+            
+            <Button circular icon='plus' color='blue' />
+            </Container>
             </div>
         )
     }
