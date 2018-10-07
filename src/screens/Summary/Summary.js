@@ -2,6 +2,7 @@ import React from 'react'
 import { Menu, Icon, Card, Button, Statistic, Container } from 'semantic-ui-react'
 import SavingBucket from './SavingBucket'
 import SavingBucketWizard from './SavingBucketWizard'
+import NoSavingsCard from './NoSavingsCard'
 
 class Summary extends React.Component {
 
@@ -35,6 +36,8 @@ class Summary extends React.Component {
             
 
             <Card.Group>
+                <NoSavingsCard />
+
                 <SavingBucketWizard
                     onSubmit={({name, meta, amount}) => alert(`name=${name}, meta=${meta}, amount=${amount}`)}
                 />    
@@ -51,7 +54,7 @@ class Summary extends React.Component {
             
 
             
-            <Button circular icon='plus' color='blue' />
+            <Button circular icon='plus' color='blue' style={{marginLeft: '1em', marginTop: '1em'}}/>
             </Container>
             </div>
         )
