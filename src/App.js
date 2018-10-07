@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import 'semantic-ui-css/semantic.min.css'
-import { Login, Summary } from './screens'
+import { Login, Summary, Logs } from './screens'
 import {
   BrowserRouter as Router,
   Route,
@@ -16,6 +16,7 @@ class App extends Component {
           <Route exact path="/" component={Login}/>
           <Route path="/login" component={Login}/>
           <Route path="/summary" component={Summary}/>
+          <Route path="/logs" component={Logs}/>
         </Switch>
       </Router>
     )
