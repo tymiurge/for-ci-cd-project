@@ -3,6 +3,8 @@ import { Menu, Icon, Card, Button, Statistic, Container } from 'semantic-ui-reac
 import SavingBucket from './SavingBucket'
 import SavingBucketWizard from './SavingBucketWizard'
 import NoSavingsCard from './NoSavingsCard'
+import TotalStats from './TotalStats'
+
 const savings = [
     {
         name: 'Bank account',
@@ -20,8 +22,6 @@ const savings = [
         amount: 2000
     }
 ]
-
-//const savings = []
 
 class Summary extends React.Component {
 
@@ -81,7 +81,6 @@ class Summary extends React.Component {
             <Container>
                 <Card.Group>
                     {
-                        
                         this.renderSavings()
                     }
                 </Card.Group>
@@ -97,6 +96,8 @@ class Summary extends React.Component {
 
                 }
             </Container>
+
+            <TotalStats savings={5000} incomes={10000} outcomes={8000} />
             </Container>
         )
     }
