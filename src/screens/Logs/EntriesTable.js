@@ -1,13 +1,8 @@
 import React from 'react'
 import { Table, Button, Icon, Label, Dropdown, Progress } from 'semantic-ui-react'
 import MonthStats from './MonthStats'
-const monthOptions = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'].map(item =>(
-    {key: item, value: item, text: item}
-))
+import Toolbar from './Toolbar'
 
-const yearOptions = ['2016', '2017', '2018'].map(item =>(
-    {key: item, value: item, text: item}
-))
 
 class EntriesTable extends React.Component {
 
@@ -18,19 +13,11 @@ class EntriesTable extends React.Component {
 
         <div>
 
-            <div>
-                <Dropdown placeholder='Month' search selection options={monthOptions} />
-                <Dropdown placeholder='Year' search selection options={yearOptions} style={{marginLeft: '.2em'}}/>
-            </div>
-
+            
+            <MonthStats incomes={5000} outcomes={2800} savings={1000}/>
             
 
-            <div>
-                <Button circular icon='calendar' color='orange' />
-                <Button circular icon='plus' color='blue' />
-                <Button circular icon='filter' color='blue' />
-                <Button circular icon='settings' color='blue' />
-            </div>
+            <Toolbar />
 
             <Table compact celled>
                 <Table.Header>
@@ -42,6 +29,7 @@ class EntriesTable extends React.Component {
                         <Table.HeaderCell collapsing>Amount</Table.HeaderCell>
                         <Table.HeaderCell>Tags</Table.HeaderCell>
                         <Table.HeaderCell>Date</Table.HeaderCell>
+                        <Table.HeaderCell>From</Table.HeaderCell>
                         
                         
                     </Table.Row>
@@ -60,6 +48,7 @@ class EntriesTable extends React.Component {
                             </Label>
                         </Table.Cell>
                         <Table.Cell collapsing>7 oct 2018</Table.Cell>
+                        <Table.Cell collapsing active></Table.Cell>
                         
                         
                     </Table.Row>
@@ -75,6 +64,7 @@ class EntriesTable extends React.Component {
                             </Label>
                         </Table.Cell>
                         <Table.Cell collapsing>6 oct 2018</Table.Cell>
+                        <Table.Cell collapsing active></Table.Cell>
                         
                         
                     </Table.Row>
@@ -90,6 +80,7 @@ class EntriesTable extends React.Component {
                             </Label>
                         </Table.Cell>
                         <Table.Cell collapsing>6 oct 2018</Table.Cell>
+                        <Table.Cell collapsing active></Table.Cell>
                         
                         
                     </Table.Row>
@@ -107,6 +98,7 @@ class EntriesTable extends React.Component {
                             </Label>
                         </Table.Cell>
                         <Table.Cell collapsing>6 oct 2018</Table.Cell>
+                        <Table.Cell collapsing><Icon name='money bill alternate outline' color='green'/></Table.Cell>
                         
                         
                     </Table.Row>
@@ -124,7 +116,7 @@ class EntriesTable extends React.Component {
                             </Label>
                         </Table.Cell>
                         <Table.Cell collapsing>6 oct 2018</Table.Cell>
-                        
+                        <Table.Cell collapsing><Icon name='money bill alternate outline' color='red'/></Table.Cell>
                         
                     </Table.Row>
 
@@ -141,6 +133,7 @@ class EntriesTable extends React.Component {
                             </Label>
                         </Table.Cell>
                         <Table.Cell collapsing>6 oct 2018</Table.Cell>
+                        <Table.Cell collapsing><Icon name='money bill alternate outline' color='red'/></Table.Cell>
                         
                         
                     </Table.Row>
@@ -149,7 +142,7 @@ class EntriesTable extends React.Component {
                 </Table.Body>
             </Table>
 
-            <MonthStats incomes={5000} outcomes={2800} savings={1000}/>
+            
   </div>
         )
     }
