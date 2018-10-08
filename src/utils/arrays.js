@@ -5,4 +5,32 @@ const chunkArray = (arr, size) => {
     return results
 }
 
-export { chunkArray }
+/**
+ * collects values of the given fieldName across array of objects
+ * @param {*} arrOfObjs - array of the following shape: 
+ * [
+ *  [{field: 'title', type: 'str', placeholder:'Title', label: 'title'}],
+ *  [
+ *      {field: 'amount', type: 'number', placeholder:'Amount', label: 'Amount'}, 
+ *      {field: 'tags', type: 'array', placeholder:'Tags', label: 'Tags'}
+ *  ],
+ *  [{field: 'from', value: 'select', options: [...]}, placeholder:'From', label: 'From']
+ * ]
+ * @param {*} fieldName 
+ */
+const fieldsAggregator = (arrOfObjs, fieldName) => {
+    
+    const traverser = (token, fieldName, aggregator) => {
+        if (!Array.isArray(token)) {
+            return [...aggregator, token[fieldName]]
+        }
+        for(let i = 0; i < token.length; i++) {
+            const next = token[i]
+            aggregator = traverser(next, fieldName, aggregator)
+        }
+        return aggregator
+    }
+    return traverser(arrOfObjs, fieldName, [])
+}
+
+export { chunkArray, fieldsAggregator }
