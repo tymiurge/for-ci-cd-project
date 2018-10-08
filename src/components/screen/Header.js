@@ -3,7 +3,7 @@ import { Menu, Icon } from 'semantic-ui-react'
 
 const Header = props => (
     <Menu stackable inverted color='blue'>
-        <Menu.Item active='true' >
+        <Menu.Item active={true} >
             <Icon name='money bill alternate outline' />
         </Menu.Item>
 

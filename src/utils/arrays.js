@@ -18,8 +18,7 @@ const chunkArray = (arr, size) => {
  * ]
  * @param {*} fieldName 
  */
-const fieldsAggregator = (arrOfObjs, fieldName) => {
-    
+const fieldAggregator = (arrOfObjs, fieldName) => {
     const traverser = (token, fieldName, aggregator) => {
         if (!Array.isArray(token)) {
             return [...aggregator, token[fieldName]]
@@ -33,4 +32,18 @@ const fieldsAggregator = (arrOfObjs, fieldName) => {
     return traverser(arrOfObjs, fieldName, [])
 }
 
-export { chunkArray, fieldsAggregator }
+
+const complexMapper = (arrOfObjs, callback) => {
+    const traverser = (token, callback, aggregator) => {
+        if (!Array.isArray(token)) {
+            return [...aggregator, callback(token)]
+        }
+        for(let i = 0; i < token.length; i ++) {
+            aggregator = traverser(token[i], callback, aggregator)
+        }
+        return aggregator
+    }
+    return traverser(arrOfObjs, callback, [])
+}
+
+export { chunkArray, fieldAggregator, complexMapper }

@@ -12,7 +12,13 @@ const options = [
 class EntryWizard extends React.Component {
 
     state = {
-        selected: ''
+        selected: '',
+        subForm: {}
+    }
+
+    onSubFormFieldChange = (value, field) => {
+        const obj = {...this.state.subForm, [field]: value}
+        this.setState({...this.state, subForm: obj})
     }
 
     render() {
@@ -36,7 +42,7 @@ class EntryWizard extends React.Component {
 
             {
                 this.state.selected === 'income' &&
-                <IncomeEntry />
+                <IncomeEntry onFieldChange={(value, field) => this.onSubFormFieldChange(value, field)} />
             }
             {
                 this.state.selected === 'outcome' &&

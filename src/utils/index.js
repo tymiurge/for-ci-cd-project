@@ -1,6 +1,6 @@
 import { notToUse } from './warnings'
 import { strIsNumber } from './validation'
-import { chunkArray, fieldsAggregator } from './arrays'
+import { chunkArray, fieldAggregator, complexMapper } from './arrays'
 
 const warnings = {
     notToUse
@@ -12,7 +12,8 @@ const validation = {
 
 const arrays = {
     chunkArray,
-    fieldsAggregator
+    fieldAggregator,
+    complexMapper
 }
 
 export {
