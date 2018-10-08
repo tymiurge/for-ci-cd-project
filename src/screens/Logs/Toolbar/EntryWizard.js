@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Input, Select, Segment, Button, Label } from 'semantic-ui-react'
+import { Select, Segment, Button } from 'semantic-ui-react'
 import { forms } from 'components'
 
 

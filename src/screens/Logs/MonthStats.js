@@ -1,5 +1,5 @@
 import React from 'react'
-import { Segment, Message, Progress } from 'semantic-ui-react'
+import { Progress } from 'semantic-ui-react'
 import { layouting } from 'components'
 
 const MonthStats = ({incomes, outcomes, savings}) => {
