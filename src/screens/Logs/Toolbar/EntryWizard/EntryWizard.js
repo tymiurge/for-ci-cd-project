@@ -50,7 +50,7 @@ class EntryWizard extends React.Component {
                         {field: 'amount', type: 'number', placeholder:'Amount', label: 'Amount'}, 
                         {field: 'tags', type: 'str', placeholder:'Tag', label: 'Tag'}
                     ],
-                    [{field: 'from', type: 'select', placeholder:'From', label: 'From'}]
+                    [{field: 'from', type: 'select', options: options, placeholder:'From', label: 'From'}]
                 ]}
                 onSubmit={fields => {
                     alert(fields)

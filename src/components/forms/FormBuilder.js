@@ -27,6 +27,12 @@ class FormBuilder extends React.Component {
         select: Select
     }
 
+    typeTransformers = {
+        str: value => value,
+        select: value => value,
+        number: value => parseInt(value)
+    }
+
     validators = {
         str: value => value !== '',
         number: value => validation.strIsNumber(value),
@@ -65,6 +71,17 @@ class FormBuilder extends React.Component {
         )
         if (!valid) {
             this.setState({...this.state, valid: false})
+        } else {
+            this.props.onSubmit(
+                fieldAndType.reduce(
+                    (aggregator, current) => {
+                        const value = this.state.fields[current.field]
+                        const transformer = this.typeTransformers[current.type]
+                        return {...aggregator, [current.field]: transformer(value)}
+                    },
+                    {}
+                )
+            )
         }
     }
 
@@ -97,6 +114,7 @@ class FormBuilder extends React.Component {
                                             label={item.label}
                                             placeholder={item.placeholder}
                                             value={this.state.fields[item.field]}
+                                            options={item.options}
                                             onChange={(e, data) => {
                                                 const value = item.type === 'select' ? data.value : e.target.value
                                                 this.onFieldChange(value, item.field)
