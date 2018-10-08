@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Form, Input, Select, Button } from 'semantic-ui-react'
-import { arrays } from 'utils'
+import { arrays, validation } from 'utils'
 
 class FormBuilder extends React.Component {
 
@@ -21,12 +21,16 @@ class FormBuilder extends React.Component {
         onCancel: PropTypes.func.isRequired
     }
 
-    
-
     itemTypes = {
         str: Input,
         number: Input,
         select: Select
+    }
+
+    validators = {
+        str: value => value !== '',
+        number: value => validation.strIsNumber(value),
+        select: value => value !== ''
     }
 
     constructor(props) {
@@ -40,7 +44,8 @@ class FormBuilder extends React.Component {
                 {}
             )
         this.state = {
-            fields
+            fields,
+            valid: true
         }
     }
 
@@ -50,7 +55,25 @@ class FormBuilder extends React.Component {
     }
 
     onSubmit = () => {
-        
+        const fieldAndType = arrays.complexMapper(
+            this.props.items,
+            token => ({field: token.field, type: token.type})
+        )
+        const valid = fieldAndType.reduce(
+            (aggregator, current) => aggregator && this.isFieldValid(current.field, current.type),
+            true
+        )
+        if (!valid) {
+            this.setState({...this.state, valid: false})
+        }
+    }
+
+    isFieldValid = (field, type) => {
+        const value = this.state.fields[field]
+        const validator = this.validators[type]
+        const result = validator(value)
+        console.log(`value = ${value}, validator = ${validator}, result = ${result}`)
+        return result
     }
 
     render() {
@@ -59,11 +82,17 @@ class FormBuilder extends React.Component {
             <Form size='tiny'>
                 {
                     this.props.items.map((row, rowIdx) => (
-                        <Form.Group widths='equal' key='rowIdx'>
+                        <Form.Group widths='equal' key={rowIdx}>
                             {
                                 row.map((item, itemIdx) => {
                                     return (
                                         <Form.Field
+                                            key={`row_${rowIdx}_item_${itemIdx}`}
+                                            className={
+                                                !this.state.valid && !this.isFieldValid(item.field, item.type) 
+                                                    ? 'error-state'
+                                                    : ''
+                                            }
                                             control={this.itemTypes[item.type]}
                                             label={item.label}
                                             placeholder={item.placeholder}
@@ -85,7 +114,7 @@ class FormBuilder extends React.Component {
                     circular
                     icon='check' 
                     color='blue'
-                    onClick={ () => this.props.onSubmit(this.state.fields)}
+                    onClick={ () => this.onSubmit()}
                 />
 
                 <Button 

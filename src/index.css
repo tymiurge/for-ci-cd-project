@@ -13,6 +13,6 @@ code {
     monospace;
 }
 
-.error-state input{
+.error-state input, .error-state div {
   border-color: rgb(255, 40, 0) !important;
 }
