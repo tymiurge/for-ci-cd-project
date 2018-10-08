@@ -1,8 +1,8 @@
 import React from 'react'
 import { Button, Dropdown } from 'semantic-ui-react'
 import EntryWizard from './EntryWizard'
+import DateSelector from './DateSelector'
 //import PropTypes from 'prop-types'
-
 const monthOptions = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'].map(item =>(
     {key: item, value: item, text: item}
 ))
@@ -26,16 +26,10 @@ class Toolbar extends React.Component {
             </div>
             }
             <EntryWizard />
-            {
-                false &&
-                <div>
-                <Dropdown placeholder='Month' search selection options={monthOptions} />
-                <Dropdown placeholder='Year' search selection options={yearOptions} style={{marginLeft: '.2em'}}/>
-                <Button circular icon='check' color='blue' style={{marginLeft: '0.5em'}}/>
-                <Button circular icon='cancel' color='red' />
-                </div>
+            
+            <DateSelector />
 
-            }
+            
             </div>
         )
     }
