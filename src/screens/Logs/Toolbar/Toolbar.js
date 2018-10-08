@@ -2,6 +2,7 @@ import React from 'react'
 import { Button, Dropdown } from 'semantic-ui-react'
 import EntryWizard from './EntryWizard'
 //import PropTypes from 'prop-types'
+
 const monthOptions = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'].map(item =>(
     {key: item, value: item, text: item}
 ))
