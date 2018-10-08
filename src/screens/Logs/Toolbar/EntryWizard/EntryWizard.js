@@ -3,6 +3,7 @@ import { Form, Input, Select, Segment, Button } from 'semantic-ui-react'
 import IncomeEntry from './IncomeEntry'
 import OutcomeEntry from './OutcomeEntry';
 import TransferEntry from './TransferEntry'
+import { forms } from 'components'
 
 const options = [
     { key: '1', text: 'Income', value: 'income' },
@@ -24,7 +25,8 @@ class EntryWizard extends React.Component {
     render() {
         return (
             <Segment>
-
+            {
+                false &&
             <Form>
             <Form.Group widths='equal'>
                 <Form.Field control={Input} label='Entry title' placeholder='Title' />
@@ -39,20 +41,23 @@ class EntryWizard extends React.Component {
                 />
             </Form.Group>
             </Form>
+            }
+            
+            <forms.FormBuilder 
+                items={[
+                    [{field: 'title', type: 'str', placeholder:'Title', label: 'Title'}],
+                    [
+                        {field: 'amount', type: 'number', placeholder:'Amount', label: 'Amount'}, 
+                        {field: 'tags', type: 'str', placeholder:'Tag', label: 'Tag'}
+                    ],
+                    [{field: 'from', type: 'select', placeholder:'From', label: 'From'}]
+                ]}
+                onSubmit={fields => {
+                    alert(fields)
+                }}
+                onCancel={() => {}}
+            />
 
-            {
-                this.state.selected === 'income' &&
-                <IncomeEntry onFieldChange={(value, field) => this.onSubFormFieldChange(value, field)} />
-            }
-            {
-                this.state.selected === 'outcome' &&
-                <OutcomeEntry />
-            }
-            {
-                this.state.selected === 'transfer' &&
-                <TransferEntry />
-            }
-                
                 <div>
                     {
                         this.state.selected !== '' &&

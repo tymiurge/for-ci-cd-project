@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Form, Input, Select } from 'semantic-ui-react'
+import { Form, Input, Select, Button } from 'semantic-ui-react'
 import { arrays } from 'utils'
 
 class FormBuilder extends React.Component {
@@ -26,21 +26,37 @@ class FormBuilder extends React.Component {
     itemTypes = {
         str: Input,
         number: Input,
-        array: Input,
         select: Select
     }
 
     constructor(props) {
         super(props)
-        const fields = arrays.fieldsAggregator(this.props.items, 'field').map(field )
+        const fs = arrays.fieldAggregator(this.props.items, 'field')
+        const fields = 
+            fs.reduce(
+                (aggregator, current) => {
+                    return{...aggregator, [current]: ''}
+                },
+                {}
+            )
+        this.state = {
+            fields
+        }
+    }
+
+    onFieldChange = (value, fieldName) => {
+        const stamp = {...this.state.fields, [fieldName]:value}
+        this.setState({...this.state, fields: stamp})
+    }
+
+    onSubmit = () => {
         
     }
 
-
-
     render() {
         return (
-            <Form>
+            <div>
+            <Form size='tiny'>
                 {
                     this.props.items.map((row, rowIdx) => (
                         <Form.Group widths='equal' key='rowIdx'>
@@ -51,6 +67,11 @@ class FormBuilder extends React.Component {
                                             control={this.itemTypes[item.type]}
                                             label={item.label}
                                             placeholder={item.placeholder}
+                                            value={this.state.fields[item.field]}
+                                            onChange={(e, data) => {
+                                                const value = item.type === 'select' ? data.value : e.target.value
+                                                this.onFieldChange(value, item.field)
+                                            }}
                                         />
                                     )
                                 })
@@ -58,16 +79,24 @@ class FormBuilder extends React.Component {
                         </Form.Group>
                     ))
                 }
-            <Form.Group widths='equal'>
-                <Form.Field 
-                    control={Input} label='Amount' placeholder='Last name'
-                    value={this.state.amount}
-                    onChange={e => this.onFieldChange(e.target.value, 'amount')}
-                />
-              <Form.Field control={Input} label='Tags' placeholder='Last name' />
-              
-            </Form.Group>
             </Form>
+                <div>
+                <Button 
+                    circular
+                    icon='check' 
+                    color='blue'
+                    onClick={ () => this.props.onSubmit(this.state.fields)}
+                />
+
+                <Button 
+                    circular
+                    icon='close' 
+                    color='red'
+                    //onClick={ () => this.props.onCancel()}
+                />
+                </div>
+            </div>
+
         )
     }
 }

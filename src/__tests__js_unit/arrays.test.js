@@ -17,24 +17,11 @@ it('fieldsAggregator positive case', () => {
 
 it('complexMapper positive case', () => {
     const results = [
-        {
-            fieldName: 'title',
-            type: 'str'
-        },
-        {
-            fieldName: 'amount',
-            type: 'number'
-        },
-        {
-            fieldName: 'tags',
-            type: 'array'
-        },
-        {
-            fieldName: 'from',
-            type: 'select'
-        }
+        { fieldName: 'title', type: 'str' },
+        { fieldName: 'amount', type: 'number' },
+        { fieldName: 'tags', type: 'array' },
+        { fieldName: 'from', type: 'select' }
     ]
-
     expect(
         arrays.complexMapper(arrOfObjs, token => ({fieldName: token.field, type: token.type}))
     ).toEqual(results)
