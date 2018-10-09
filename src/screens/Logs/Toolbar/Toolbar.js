@@ -5,39 +5,56 @@ import DateSelector from './DateSelector'
 import Filter from './Filter'
 
 //import PropTypes from 'prop-types'
-const monthOptions = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'].map(item =>(
-    {key: item, value: item, text: item}
-))
-
-const yearOptions = ['2016', '2017', '2018'].map(item =>(
-    {key: item, value: item, text: item}
-))
 
 class Toolbar extends React.Component {
+
+    state = {
+        mode: 'buttons'
+    }
+
+    setMode = mode => {
+        this.setState({...this.state, mode})
+    }
 
     render() {
         return (
             <div>
             {
-                true &&
-            <div>
-                <Label color='orange' size='big'>
-                    October 2018
-                </Label>
-                <Button circular icon='calendar' color='orange' />
-                <Button circular icon='plus' color='blue' />
-                <Button circular icon='filter' color='blue' />
-            </div>
+                this.state.mode === 'buttons' &&
+                <div>
+                    <Label color='orange' size='big'>
+                        October 2018
+                    </Label>
+                    <Button circular icon='calendar' color='orange' 
+                        onClick={() => this.setMode('selector')}
+                    />
+                    <Button circular icon='plus' color='blue'
+                        onClick={() => this.setMode('wizard')}
+                    />
+                    <Button circular icon='filter' color='blue' 
+                        onClick={() => this.setMode('filter')}
+                    />
+                </div>
             }
-            <EntryWizard />
-            
-            <DateSelector />
-
-            <Filter
-                onChange={value => value}
-                onClose={() => alert('closing filter')}
-            />
-            
+            {
+                this.state.mode === 'wizard' &&
+                <EntryWizard
+                    onCancel={() => this.setMode('buttons')}
+                />
+            }
+            {
+                this.state.mode === 'selector' &&
+                <DateSelector 
+                    onCancel={() => this.setMode('buttons')}
+                />
+            }
+            {
+                this.state.mode === 'filter' &&
+                <Filter
+                    onChange={value => value}
+                    onClose={() => this.setMode('buttons')}
+                />
+            }
             </div>
         )
     }

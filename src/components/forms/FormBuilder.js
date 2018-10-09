@@ -139,7 +139,7 @@ class FormBuilder extends React.Component {
                     circular
                     icon='close' 
                     color='red'
-                    //onClick={ () => this.props.onCancel()}
+                    onClick={ () => this.props.onCancel()}
                 />
                 </div>
             </div>

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Select, Segment, Button } from 'semantic-ui-react'
 import { forms } from 'components'
+import PropTypes from 'prop-types'
 
 
 const options = [
@@ -58,6 +59,10 @@ const wizards = {
 
 class EntryWizard extends React.Component {
 
+    static propTypes = {
+        onCancel: PropTypes.func.isRequired
+    }
+
     state = {
         selected: '',
         subForm: {}
@@ -85,7 +90,7 @@ class EntryWizard extends React.Component {
                         icon='close' 
                         color='red'
                         style={{marginLeft: '0.5em'}}
-                        //onClick={ () => this.props.onCancel()}
+                        onClick={ () => this.props.onCancel()}
                     />
                 }
                 {
@@ -96,7 +101,7 @@ class EntryWizard extends React.Component {
                             onSubmit={fields => {
                                 alert(fields)
                             }}
-                            onCancel={() => {}}
+                            onCancel={() => this.props.onCancel()}
                         />
                     </Segment>
                 }    

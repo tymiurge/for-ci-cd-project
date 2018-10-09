@@ -6,7 +6,7 @@ const MonthStats = ({incomes, outcomes, savings}) => {
     const max = Math.max.apply(null, [incomes, outcomes, savings])
     return (
         
-        <div style={{marginTop: '0.5em', marginBottom: '1.5em'}}>
+        <div style={{marginTop: '2em', marginBottom: '1.5em'}}>
         <layouting.RowsStack>
         <Progress percent={incomes / max * 100} size='tiny' color='blue'>Incomes: {incomes}</Progress>
         <Progress percent={outcomes / max * 100} size='tiny' color='red'>Outcomes: {outcomes}</Progress>
