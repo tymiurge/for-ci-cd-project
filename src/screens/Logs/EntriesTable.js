@@ -1,19 +1,45 @@
 import React from 'react'
-import { Table, Icon, Label } from 'semantic-ui-react'
+import { Table, Icon } from 'semantic-ui-react'
 import MonthStats from './MonthStats'
 import Toolbar from './Toolbar'
-
+import PropTypes from 'prop-types'
 
 class EntriesTable extends React.Component {
 
+    static propTypes = {
+        entries: PropTypes.array.isRequired
+    }
+
+    entryTypeFormatter = type => {
+        if (type === 'income') {
+            return (
+                <Icon name='sign-in' color='blue' />    
+            )
+        } 
+        if (type === 'outcome') {
+            return (
+                <Icon name='sign-out' color='red' />    
+            )
+        }
+        return (
+            <Icon name='sync alternate' color='green' />    
+        )
+    }
+
+    entryFromFormatter = entry => {
+        if (entry.type !== 'outcome') { return (<div/>)}
+        return (
+            <Icon 
+                name='money bill alternate outline' 
+                color={entry.from === 'storages' ? 'red' : 'green'}
+            />
+        )
+    }
+
     render() {
         return (
-            
-
-
         <div>
 
-            
             <MonthStats incomes={5000} outcomes={2800} savings={1000}/>
             
 
@@ -36,113 +62,26 @@ class EntriesTable extends React.Component {
                 </Table.Header>
 
                 <Table.Body>
-                    <Table.Row>
-                        <Table.Cell>1</Table.Cell>
-                        <Table.Cell><Icon name='sign-in'color='blue'/></Table.Cell>
-                        <Table.Cell>Salary</Table.Cell>
-                        
-                        <Table.Cell>3000</Table.Cell>
-                        <Table.Cell>
-                            <Label color='green' horizontal>
-                                salary
-                            </Label>
-                        </Table.Cell>
-                        <Table.Cell collapsing>7 oct 2018</Table.Cell>
-                        <Table.Cell collapsing active></Table.Cell>
-                        
-                        
-                    </Table.Row>
-                    <Table.Row>
-                        <Table.Cell>2</Table.Cell>
-                        <Table.Cell><Icon name='sign-in'color='blue'/></Table.Cell>
-                        <Table.Cell>Depesit return</Table.Cell>
-                        
-                        <Table.Cell>500</Table.Cell>
-                        <Table.Cell>
-                            <Label color='violet' horizontal>
-                                deposit
-                            </Label>
-                        </Table.Cell>
-                        <Table.Cell collapsing>6 oct 2018</Table.Cell>
-                        <Table.Cell collapsing active></Table.Cell>
-                        
-                        
-                    </Table.Row>
-                    <Table.Row>
-                        <Table.Cell>4</Table.Cell>
-                        <Table.Cell><Icon name='sync alternate' color='green'/></Table.Cell>
-                        <Table.Cell>Transfer from Home storage to Bank account</Table.Cell>
-                        
-                        <Table.Cell>1500</Table.Cell>
-                        <Table.Cell>
-                            <Label color='blue' horizontal>
-                                transfer
-                            </Label>
-                        </Table.Cell>
-                        <Table.Cell collapsing>6 oct 2018</Table.Cell>
-                        <Table.Cell collapsing active></Table.Cell>
-                        
-                        
-                    </Table.Row>
+                    {
+                        this.props.entries.map((entry, idx) => (
+                            <Table.Row key={idx}>
+                                <Table.Cell>{idx + 1}</Table.Cell>
+                                <Table.Cell>
+                                    { this.entryTypeFormatter(entry.type)}
+                                </Table.Cell>
+                                <Table.Cell>{ entry.title }</Table.Cell>
+                                <Table.Cell>{ entry.amount }</Table.Cell>
+                                <Table.Cell>{ entry.tag }</Table.Cell>
+                                <Table.Cell collapsing>{ entry.date }</Table.Cell>
+                                <Table.Cell collapsing active={entry.type !== 'outcome'}>
+                                    { this.entryFromFormatter(entry) }
+                                </Table.Cell>
 
-                    <Table.Row>
-                        
-                        <Table.Cell>3</Table.Cell>
-                        <Table.Cell><Icon name='sign-out' color='red' /></Table.Cell>
-                        <Table.Cell>Buy food for 1 week</Table.Cell>
-                        
-                        <Table.Cell>1500</Table.Cell>
-                        <Table.Cell>
-                            <Label color='olive' horizontal>
-                                food
-                            </Label>
-                        </Table.Cell>
-                        <Table.Cell collapsing>6 oct 2018</Table.Cell>
-                        <Table.Cell collapsing><Icon name='money bill alternate outline' color='green'/></Table.Cell>
-                        
-                        
-                    </Table.Row>
-
-                    <Table.Row>
-                        
-                        <Table.Cell>4</Table.Cell>
-                        <Table.Cell><Icon name='sign-out' color='red' /></Table.Cell>
-                        <Table.Cell>charge car - 10 lt</Table.Cell>
-                        
-                        <Table.Cell>370</Table.Cell>
-                        <Table.Cell>
-                            <Label color='brown' horizontal>
-                                car
-                            </Label>
-                        </Table.Cell>
-                        <Table.Cell collapsing>6 oct 2018</Table.Cell>
-                        <Table.Cell collapsing><Icon name='money bill alternate outline' color='red'/></Table.Cell>
-                        
-                    </Table.Row>
-
-                    <Table.Row>
-                        
-                        <Table.Cell>4</Table.Cell>
-                        <Table.Cell><Icon name='sign-out' color='red' /></Table.Cell>
-                        <Table.Cell>car TO</Table.Cell>
-                        
-                        <Table.Cell>1370</Table.Cell>
-                        <Table.Cell>
-                            <Label color='brown' horizontal>
-                                car
-                            </Label>
-                        </Table.Cell>
-                        <Table.Cell collapsing>6 oct 2018</Table.Cell>
-                        <Table.Cell collapsing><Icon name='money bill alternate outline' color='red'/></Table.Cell>
-                        
-                        
-                    </Table.Row>
-
-
+                            </Table.Row>
+                        ))
+                    }
                 </Table.Body>
             </Table>
-
-            
   </div>
         )
     }
