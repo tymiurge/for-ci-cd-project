@@ -24,19 +24,22 @@ class FormBuilder extends React.Component {
     itemTypes = {
         str: Input,
         number: Input,
-        select: Select
+        select: Select,
+        date: Input
     }
 
     typeTransformers = {
         str: value => value,
         select: value => value,
-        number: value => parseInt(value)
+        number: value => parseInt(value),
+        date: value => value,
     }
 
     validators = {
         str: value => value !== '',
         number: value => validation.strIsNumber(value),
-        select: value => value !== ''
+        select: value => value !== '',
+        date: value => validation.strIsInDateFormat(value, 'mm-dd-yyy')
     }
 
     constructor(props) {
@@ -88,8 +91,8 @@ class FormBuilder extends React.Component {
     isFieldValid = (field, type) => {
         const value = this.state.fields[field]
         const validator = this.validators[type]
+        console.log(`value = ${value}, validator = ${validator}`)
         const result = validator(value)
-        console.log(`value = ${value}, validator = ${validator}, result = ${result}`)
         return result
     }
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { screen, controls } from 'components'
+import { screen, controls, forms } from 'components'
 import { Container } from 'semantic-ui-react'
 import EntriesTable from './EntriesTable'
 import Toolbar from './Toolbar'
