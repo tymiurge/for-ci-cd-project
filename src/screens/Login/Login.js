@@ -38,7 +38,7 @@ class Login extends React.Component {
               Log-in to your account
             </Header>
             <Form size='large'>
-              <Segment stacked>
+              <Segment>
                 <Form.Input 
                   fluid 
                   icon='user' 
