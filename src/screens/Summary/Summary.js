@@ -1,9 +1,10 @@
 import React from 'react'
-import { Menu, Icon, Card, Button, Container } from 'semantic-ui-react'
+import { Menu, Icon, Card, Button, Container, Segment } from 'semantic-ui-react'
 import SavingBucket from './SavingBucket'
 import SavingBucketWizard from './SavingBucketWizard'
 import NoSavingsCard from './NoSavingsCard'
 import TotalStats from './TotalStats'
+import { screen } from 'components'
 
 const savings = [
     {
@@ -57,47 +58,32 @@ class Summary extends React.Component {
     render() {
         return (
             <Container>
+                
+                <screen.Header />
 
-            <Menu stackable inverted color='blue'>
-                <Menu.Item active='true' >
-                    <Icon name='money bill alternate outline' />
-                </Menu.Item>
-
-                <Menu.Item
-                    active={false}
-                    onClick={() => alert('go to logs')}
-                >
-                    Logs
-                </Menu.Item>
-
-                <Menu.Item
-                    active={false}
-                    onClick={() => alert('go to stats')}
-                >
-                    Statistics
-                </Menu.Item>
-            </Menu>
-
-            <Container>
-                <Card.Group>
+                <Segment>
+                    <Card.Group>
+                        {
+                            this.renderSavings()
+                        }
+                    </Card.Group>
                     {
-                        this.renderSavings()
+                        !this.state.wizardDisplayed &&
+                        <Button
+                            circular
+                            icon='plus'
+                            color='blue'
+                            style={{marginLeft: '1em', marginTop: '1em'}}
+                            onClick={() => this.toggleState()}
+                        />
+
                     }
-                </Card.Group>
-                {
-                    !this.state.wizardDisplayed &&
-                    <Button
-                        circular
-                        icon='plus'
-                        color='blue'
-                        style={{marginLeft: '1em', marginTop: '1em'}}
-                        onClick={() => this.toggleState()}
-                    />
+                </Segment>
 
-                }
-            </Container>
+                <Segment>
+                    <TotalStats savings={5000} incomes={10000} outcomes={8000} />
+                </Segment>
 
-            <TotalStats savings={5000} incomes={10000} outcomes={8000} />
             </Container>
         )
     }
