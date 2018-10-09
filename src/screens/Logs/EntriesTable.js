@@ -1,7 +1,5 @@
 import React from 'react'
 import { Table, Icon } from 'semantic-ui-react'
-import MonthStats from './MonthStats'
-import Toolbar from './Toolbar'
 import PropTypes from 'prop-types'
 
 class EntriesTable extends React.Component {

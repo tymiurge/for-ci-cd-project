@@ -2,7 +2,7 @@ import React from 'react'
 import { Progress } from 'semantic-ui-react'
 import { layouting } from 'components'
 
-const MonthStats = ({incomes, outcomes, savings}) => {
+const BarStats = ({incomes, outcomes, savings}) => {
     const max = Math.max.apply(null, [incomes, outcomes, savings])
     return (
         
@@ -17,4 +17,4 @@ const MonthStats = ({incomes, outcomes, savings}) => {
     )
 }
 
-export default MonthStats
+export default BarStats

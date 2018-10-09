@@ -4,7 +4,7 @@ import SavingBucket from './SavingBucket'
 import SavingBucketWizard from './SavingBucketWizard'
 import NoSavingsCard from './NoSavingsCard'
 import TotalStats from './TotalStats'
-import { screen } from 'components'
+import { screen, controls } from 'components'
 
 const savings = [
     {
@@ -61,7 +61,7 @@ class Summary extends React.Component {
                 
                 <screen.Header />
 
-                <Segment>
+                    <controls.BarsStats incomes={100} savings={200} outcomes={300} />
                     <Card.Group>
                         {
                             this.renderSavings()
@@ -78,11 +78,8 @@ class Summary extends React.Component {
                         />
 
                     }
-                </Segment>
 
-                <Segment>
-                    <TotalStats savings={5000} incomes={10000} outcomes={8000} />
-                </Segment>
+                
 
             </Container>
         )
