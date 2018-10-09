@@ -2,6 +2,8 @@ import React from 'react'
 import { screen } from 'components'
 import { Container } from 'semantic-ui-react'
 import EntriesTable from './EntriesTable'
+import MonthStats from './MonthStats'
+import Toolbar from './Toolbar'
 
 const entries = [
     {
@@ -57,6 +59,8 @@ class Logs extends React.Component {
         return (
             <Container>
                 <screen.Header />
+                <Toolbar />
+                <MonthStats incomes={5000} outcomes={2800} savings={1000}/>
                 <EntriesTable 
                     entries={entries}
                 />

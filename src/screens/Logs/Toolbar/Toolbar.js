@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Dropdown } from 'semantic-ui-react'
+import { Button, Dropdown, Label } from 'semantic-ui-react'
 import EntryWizard from './EntryWizard'
 import DateSelector from './DateSelector'
 //import PropTypes from 'prop-types'
@@ -19,10 +19,12 @@ class Toolbar extends React.Component {
             {
                 true &&
             <div>
+                <Label color='orange' size='big'>
+                    October 2018
+                </Label>
                 <Button circular icon='calendar' color='orange' />
                 <Button circular icon='plus' color='blue' />
                 <Button circular icon='filter' color='blue' />
-                <Button circular icon='settings' color='blue' />
             </div>
             }
             <EntryWizard />

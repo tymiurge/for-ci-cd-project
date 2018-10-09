@@ -40,11 +40,6 @@ class EntriesTable extends React.Component {
         return (
         <div>
 
-            <MonthStats incomes={5000} outcomes={2800} savings={1000}/>
-            
-
-            <Toolbar />
-
             <Table compact celled>
                 <Table.Header>
                     <Table.Row>
