@@ -1,5 +1,5 @@
 import { notToUse } from './warnings'
-import { strIsNumber } from './validation'
+import { strIsNumber, strIsInDateFormat } from './validation'
 import { chunkArray, fieldAggregator, complexMapper } from './arrays'
 
 const warnings = {
@@ -7,7 +7,8 @@ const warnings = {
 }
 
 const validation = {
-    strIsNumber
+    strIsNumber,
+    strIsInDateFormat
 }
 
 const arrays = {
