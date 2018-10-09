@@ -1,7 +1,9 @@
 import Header from './Header'
+import TitledHeader from './TitledHeader'
 
 const screen = {
-    Header
+    Header,
+    TitledHeader
 }
 
 export default screen
