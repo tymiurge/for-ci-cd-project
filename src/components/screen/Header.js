@@ -1,5 +1,5 @@
 import React from 'react'
-import { Menu, Icon, Dropdown } from 'semantic-ui-react'
+import { Menu, Dropdown } from 'semantic-ui-react'
 
 const Header = props => (
     <Menu stackable inverted color='blue'>
@@ -15,7 +15,7 @@ const Header = props => (
         </Menu.Item>
 
         <Menu.Menu position='right'>
-          <Dropdown item text={(<Icon name='user' />)}>
+          <Dropdown item icon='user'>
             <Dropdown.Menu>
               <Dropdown.Item>Profile</Dropdown.Item>
               <Dropdown.Item>Sign-out</Dropdown.Item>

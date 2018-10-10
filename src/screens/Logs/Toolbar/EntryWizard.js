@@ -15,7 +15,8 @@ const wizards = {
         [ {field: 'title', type: 'str', placeholder:'Title', label: 'Title'} ],
         [
             {field: 'amount', type: 'number', placeholder:'Amount', label: 'Amount'}, 
-            {field: 'tags', type: 'str', placeholder:'Tag', label: 'Tag'}
+            {field: 'tags', type: 'str', placeholder:'Tag', label: 'Tag'},
+            {field: 'date', type: 'date', placeholder:'Enter date in dd-mm-yyyy format', label: 'Date'}
         ]
     ], 
     outcome: [
@@ -30,7 +31,9 @@ const wizards = {
                     { key: '2', text: 'Bank Account', value: 'bank_account' },
                     { key: '3', text: 'Home Storage', value: 'home_storage' },
                 ]
-            }
+            },
+            {field: 'date', type: 'date', placeholder:'Enter date in dd-mm-yyyy format', label: 'Date'}
+            
         ]
     ], 
     transfer: [
@@ -52,7 +55,9 @@ const wizards = {
                     { key: '2', text: 'Bank Account', value: 'bank_account' },
                     { key: '3', text: 'Home Storage', value: 'home_storage' },
                 ]
-            }
+            },
+            {field: 'date', type: 'date', placeholder:'Enter date in dd-mm-yyyy format', label: 'Date'}
+            
         ]
     ],
 }
