@@ -59,7 +59,7 @@ class Summary extends React.Component {
         return (
             <Container>
                 
-                <screen.Header />
+                <screen.Header active='buckets' />
 
                     <controls.BarsStats incomes={100} savings={200} outcomes={300} />
                     <Card.Group>

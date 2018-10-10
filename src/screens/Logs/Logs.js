@@ -57,7 +57,7 @@ class Logs extends React.Component {
     render() {
         return (
             <Container>
-                <screen.Header />
+                <screen.Header active='logs' />
                 <Toolbar />
                 <controls.BarsStats incomes={5000} outcomes={2800} savings={1000} />
                 <EntriesTable 
