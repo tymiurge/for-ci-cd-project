@@ -1,5 +1,6 @@
 import {
-    USER_LOGIN_REQUEST
+    USER_LOGIN_REQUEST,
+    SIGN_UP_REQUEST
 } from './action-names'
 
 const credentials = (state = {}, action) => {
@@ -11,9 +12,19 @@ const credentials = (state = {}, action) => {
     }
 }
 
-const user = (state = {}, action) => {
-    credentials: credentials(state.credentials, action)
+const signUpDetails = (state = {}, action) => {
+    switch (action.type) {
+        case SIGN_UP_REQUEST:
+            return action.details
+        default:
+            return state
+    }
 }
+
+const user = (state = {}, action) => ({
+    credentials: credentials(state.credentials, action),
+    signUpDetails: signUpDetails(state.signUpDetails, action)
+})
 
 export default user
 /*
