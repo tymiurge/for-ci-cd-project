@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Dropdown, Label } from 'semantic-ui-react'
+import { Button } from 'semantic-ui-react'
 import EntryWizard from './EntryWizard'
 import Filter from './Filter'
 

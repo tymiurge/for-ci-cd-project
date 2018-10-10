@@ -1,9 +1,8 @@
 import React from 'react'
-import { Menu, Icon, Card, Button, Container, Segment } from 'semantic-ui-react'
+import { Card, Button, Container } from 'semantic-ui-react'
 import SavingBucket from './SavingBucket'
 import SavingBucketWizard from './SavingBucketWizard'
 import NoSavingsCard from './NoSavingsCard'
-import TotalStats from './TotalStats'
 import { screen, controls } from 'components'
 
 const savings = [
