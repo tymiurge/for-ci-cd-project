@@ -1,3 +1,18 @@
 import Register from './Register'
+import { connect } from 'react-redux'
+import { $registerUser } from './../../reducers/registration'
 
-export default Register
+const mapStateToProps = state => ({
+  confirmed: state.registration.confirmed
+})
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onSubmit: data => dispatch($registerUser(data))
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Register)

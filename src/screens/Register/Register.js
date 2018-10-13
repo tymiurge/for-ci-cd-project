@@ -2,6 +2,8 @@ import React from 'react'
 import { Grid, Header, Form, Segment, Button, Message } from 'semantic-ui-react'
 import { controls } from 'components'
 import { validation } from 'utils'
+import PropTypes from 'prop-types'
+import { Redirect } from 'react-router'
 
 const items = [
   [
@@ -18,6 +20,11 @@ const items = [
 ]
 
 class Register extends React.Component {
+
+  static propTypes = {
+    confirmed: PropTypes.bool.isRequired,
+    onSubmit: PropTypes.func.isRequired
+  }
 
   state = {
     firstName: '',
@@ -42,13 +49,18 @@ class Register extends React.Component {
       if (this.state.valid) {
         this.setState(
           {...this.state, pswdMatch: true},
-          () => alert('ok, form validated')
+          () => this.props.onSubmit(this.state)
         )
       }
     }
   }
 
   render() {
+    if (this.props.confirmed) {
+      return (
+        <Redirect to='/summary' />
+      )
+    }
     
     return (
       <div className='login-form'>
