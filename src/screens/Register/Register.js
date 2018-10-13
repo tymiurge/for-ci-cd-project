@@ -3,6 +3,20 @@ import { Grid, Header, Form, Segment, Button, Input, Message } from 'semantic-ui
 import { controls } from 'components'
 import { validation } from 'utils'
 
+const items = [
+  [
+    {placeholder: 'First Name', icon: 'user', type: 'text', fieldBinding: 'firstName', validators: [validation.strIsNotEmpty]},
+    {placeholder: 'Last Name', icon: 'user', type: 'text', fieldBinding: 'lastName', validators: [validation.strIsNotEmpty]}
+  ],
+  [
+    {placeholder: 'Mail', icon: 'mail', type: 'email', fieldBinding: 'mail', validators: [validation.strIsNotEmpty]}
+  ],
+  [
+    {placeholder: 'Password', icon: 'lock', type: 'password', fieldBinding: 'pswd', validators: [validation.strIsNotEmpty]},
+    {placeholder: 'Repeat Password', icon: 'lock', type: 'password', fieldBinding: 'pswdDupl', validators: [validation.strIsNotEmpty]}
+  ]
+]
+
 class Register extends React.Component {
 
   state = {
@@ -10,7 +24,7 @@ class Register extends React.Component {
     lastName: '',
     mail: '',
     pswd: '',
-    pswdDuplication: '',
+    pswdDupl: '',
     pswdMatch: true
   }
 
@@ -19,8 +33,8 @@ class Register extends React.Component {
   }
 
   onSubmit = () => {
-    const { pswd, pswdDuplication } = this.state
-    if (pswd !== pswdDuplication) {
+    const { pswd, pswdDupl } = this.state
+    if (pswd !== pswdDupl) {
       this.setState({...this.state, pswdMatch: false})
     }
   }
@@ -30,9 +44,8 @@ class Register extends React.Component {
     return (
       <div className='login-form'>
         {/*
-          Heads up! The styles below are necessary for the correct render of this example.
-          You can do same with CSS, the main idea is that all the elements up to the `Grid`
-          below must have a height of 100%.
+          The styles below are necessary for the correct render of this page.
+          The main idea is that all the elements up to the `Grid` below must have a height of 100%.
         */}
         <style>{`
           body > div,
@@ -48,80 +61,43 @@ class Register extends React.Component {
             </Header>
             <Form size='large'>
               <Segment>
-              <Form.Group widths='equal'>
-                <Form.Field>
-                  <controls.ValidatedInput
-                    placeholder='First Name'
-                    icon='user'
-                    fieldBinding='firstName'
-                    onChange={(value, field) => this.onFieldChange(value, field)}
-                    validators={[validation.strIsNotEmpty]}
-                  />
-                </Form.Field>
-                <Form.Field>
-                  <controls.ValidatedInput
-                    placeholder='Last Name'
-                    icon='user'
-                    fieldBinding='lastName'
-                    onChange={(value, field) => this.onFieldChange(value, field)}
-                    validators={[validation.strIsNotEmpty]}
-                  />
-                </Form.Field>
-              </Form.Group>
-              <Form.Field>
-                <controls.ValidatedInput
-                  placeholder='Mail'
-                  icon='mail'
-                  type='email'
-                  fieldBinding='mail'
-                  onChange={(value, field) => this.onFieldChange(value, field)}
-                  validators={[validation.strIsNotEmpty]}
+                {
+                  items.map((row, rowIdx) => (
+                    <Form.Group widths='equal' key={rowIdx}>
+                    {
+                      row.map((item, itemIdx) => (
+                        <Form.Field>
+                          <controls.ValidatedInput
+                            {...item}
+                            onChange={(value, field) => this.onFieldChange(value, field)}  
+                          />
+                        </Form.Field>
+                      ))
+                    }
+                    </Form.Group>
+                  ))
+                }
+                {
+                  !this.state.pswdMatch &&
+                  <Message negative>
+                    <Message.Header>Passwords do not match</Message.Header>
+                    <p>Please re-enter passswords so that they be equaled to each other.</p>
+                  </Message>
+                }
+                <Button
+                  color='blue'
+                  fluid 
+                  size='large'
+                  content='Register'
+                  onClick={this.onSubmit}
                 />
-              </Form.Field>
-              <Form.Group widths='equal'>
-                <Form.Field>
-                  <controls.ValidatedInput
-                    placeholder='Password'
-                    icon='lock'
-                    type='password'
-                    fieldBinding='pswd'
-                    onChange={(value, field) => this.onFieldChange(value, field)}
-                    validators={[validation.strIsNotEmpty]}
-                  />
-                </Form.Field>
-                <Form.Field>
-                  <controls.ValidatedInput
-                    placeholder='Repeat password'
-                    icon='lock'
-                    type='password'
-                    fieldBinding='pswdDuplication'
-                    onChange={(value, field) => this.onFieldChange(value, field)}
-                    validators={[validation.strIsNotEmpty]}
-                  />
-                </Form.Field>
-              </Form.Group>  
-              {
-                !this.state.pswdMatch &&
-                <Message negative>
-                  <Message.Header>Passwords do not match</Message.Header>
-                  <p>Please re-enter passswords so that they be equaled to each other.</p>
-                </Message>
-              }
-              <Button
-                color='blue'
-                fluid 
-                size='large'
-                content='Register'
-                onClick={this.onSubmit}
-              />
-            </Segment>
-          </Form>
-            
-        </Grid.Column>
-      </Grid>
-    </div>
-  )}
-
+              </Segment>
+            </Form>
+          </Grid.Column>
+        </Grid>
+      </div>
+    )
+  }
 }
 
 export default Register
