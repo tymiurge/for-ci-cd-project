@@ -23,7 +23,8 @@ class Register extends React.Component {
 
   static propTypes = {
     confirmed: PropTypes.bool.isRequired,
-    onSubmit: PropTypes.func.isRequired
+    onSubmit: PropTypes.func.isRequired,
+    errors: PropTypes.array.isRequired
   }
 
   state = {
@@ -104,6 +105,14 @@ class Register extends React.Component {
                     <Message.Header>Passwords do not match</Message.Header>
                     <p>Please re-enter passswords so that they be equaled to each other.</p>
                   </Message>
+                }
+                {
+                  this.props.errors.length > 0 &&
+                  this.props.errors.map(error => (
+                    <Message negative>
+                      { error }
+                    </Message>
+                  ))
                 }
                 <Button
                   color='blue'

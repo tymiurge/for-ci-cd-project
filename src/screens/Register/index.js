@@ -3,7 +3,8 @@ import { connect } from 'react-redux'
 import { $registerUser } from './../../reducers/registration'
 
 const mapStateToProps = state => ({
-  confirmed: state.registration.confirmed
+  confirmed: state.registration.confirmed,
+  errors: state.registration.errors
 })
 
 const mapDispatchToProps = dispatch => {
