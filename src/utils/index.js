@@ -1,21 +1,6 @@
-import { notToUse } from './warnings'
-import { strIsNumber, strIsInDateFormat } from './validation'
-import { chunkArray, fieldAggregator, complexMapper } from './arrays'
-
-const warnings = {
-    notToUse
-}
-
-const validation = {
-    strIsNumber,
-    strIsInDateFormat
-}
-
-const arrays = {
-    chunkArray,
-    fieldAggregator,
-    complexMapper
-}
+import warnings from './warnings'
+import validation from './validation'
+import arrays from './arrays'
 
 export {
     warnings,

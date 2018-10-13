@@ -46,4 +46,6 @@ const complexMapper = (arrOfObjs, callback) => {
     return traverser(arrOfObjs, callback, [])
 }
 
-export { chunkArray, fieldAggregator, complexMapper }
+const arrays = { chunkArray, fieldAggregator, complexMapper }
+
+export default arrays

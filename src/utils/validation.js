@@ -25,4 +25,12 @@ const strIsInDateFormat = (str, format) => {
     return regex.test(str)
 }
 
-export { strIsNumber, strIsInDateFormat }
+const strIsNotEmpty = str => str !== ''
+
+const validation = {
+  strIsNumber,
+  strIsInDateFormat,
+  strIsNotEmpty
+}
+
+export default validation
