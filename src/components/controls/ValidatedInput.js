@@ -43,7 +43,10 @@ class ValidatedInput extends React.Component {
       },
       true
     )
-    this.setState({...this.state, valid})
+    this.setState(
+      {...this.state, valid},
+      () => this.props.onChange(this.state.value, this.props.fieldBinding, valid)
+    )
   }
 
   render() {

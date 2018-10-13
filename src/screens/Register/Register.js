@@ -1,5 +1,5 @@
 import React from 'react'
-import { Grid, Header, Form, Segment, Button, Input, Message } from 'semantic-ui-react'
+import { Grid, Header, Form, Segment, Button, Message } from 'semantic-ui-react'
 import { controls } from 'components'
 import { validation } from 'utils'
 
@@ -9,7 +9,7 @@ const items = [
     {placeholder: 'Last Name', icon: 'user', type: 'text', fieldBinding: 'lastName', validators: [validation.strIsNotEmpty]}
   ],
   [
-    {placeholder: 'Mail', icon: 'mail', type: 'email', fieldBinding: 'mail', validators: [validation.strIsNotEmpty]}
+    {placeholder: 'Mail', icon: 'mail', type: 'email', fieldBinding: 'mail', validators: [validation.strIsNotEmpty, validation.strIsEmail]}
   ],
   [
     {placeholder: 'Password', icon: 'lock', type: 'password', fieldBinding: 'pswd', validators: [validation.strIsNotEmpty]},
@@ -25,17 +25,26 @@ class Register extends React.Component {
     mail: '',
     pswd: '',
     pswdDupl: '',
-    pswdMatch: true
+    pswdMatch: true,
+    valid: true
   }
 
-  onFieldChange = (value, fieldName) => {
-    this.setState({...this.state, [fieldName]: value})
+  onFieldChange = (value, fieldName, valid = true) => {
+    this.setState({...this.state, [fieldName]: value, valid: this.state.valid && valid})
   }
 
   onSubmit = () => {
     const { pswd, pswdDupl } = this.state
-    if (pswd !== pswdDupl) {
+    const pswdMatch = pswd === pswdDupl
+    if (!pswdMatch) {
       this.setState({...this.state, pswdMatch: false})
+    } else {
+      if (this.state.valid) {
+        this.setState(
+          {...this.state, pswdMatch: true},
+          () => alert('ok, form validated')
+        )
+      }
     }
   }
 
@@ -66,10 +75,10 @@ class Register extends React.Component {
                     <Form.Group widths='equal' key={rowIdx}>
                     {
                       row.map((item, itemIdx) => (
-                        <Form.Field>
+                        <Form.Field key={`row_${rowIdx}_item_${itemIdx}`}>
                           <controls.ValidatedInput
                             {...item}
-                            onChange={(value, field) => this.onFieldChange(value, field)}  
+                            onChange={(value, field, valid = true) => this.onFieldChange(value, field)}  
                           />
                         </Form.Field>
                       ))
