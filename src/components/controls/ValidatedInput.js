@@ -10,7 +10,8 @@ class ValidatedInput extends React.Component {
     fieldBinding: PropTypes.string,
     onChange: PropTypes.func,
     placeholder: PropTypes.string,
-    icon: PropTypes.string
+    icon: PropTypes.string,
+    type: PropTypes.string
   }
 
   static defaultProps = {
@@ -19,7 +20,8 @@ class ValidatedInput extends React.Component {
     fieldBinding: null,
     onChange: () => {},
     placeholder: '',
-    icon: ''
+    icon: '',
+    type: 'text'
   }
 
   state = {
@@ -50,6 +52,7 @@ class ValidatedInput extends React.Component {
       placeholder: this.props.placeholder,
       value: this.state.value,
       className: this.state.valid ? '' : 'error-state',
+      type: this.props.type,
       onBlur: () => this.onBlur(),
       onChange: e => this.onChange(e.target.value)
     })
