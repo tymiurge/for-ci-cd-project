@@ -23,3 +23,11 @@ it('strIsInDateFormat negative case', () => {
 it('strIsInDateFormat negative case - wrong delimiter with right format', () => {
     expect(validation.strIsInDateFormat('112/10/2018')).toEqual(false)
 })
+
+it('strIsEmail positive case', () => {
+  expect(validation.strIsEmail('shrek@gmail.com')).toEqual(true)
+})
+
+it('strIsEmail negative case', () => {
+  expect(validation.strIsEmail('shrekgmail.com')).toEqual(false)
+})
