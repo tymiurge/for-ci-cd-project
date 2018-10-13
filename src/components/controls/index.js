@@ -1,7 +1,9 @@
 import BarsStats from './BarsStats'
+import ValidatedInput from './ValidatedInput'
 
 const controls = {
-    BarsStats
+    BarsStats,
+    ValidatedInput
 }
 
 export default controls
