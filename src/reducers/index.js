@@ -1,9 +1,8 @@
 import user from './user'
 import registration from './registration'
+import { combineReducers } from 'redux'
 
-const reducer = (state = {}, action) => ({
-    user: user(state.user, action),
-    registration: registration(state.registration, action)
+export default combineReducers({
+  user,
+  registration
 })
-
-export default reducer

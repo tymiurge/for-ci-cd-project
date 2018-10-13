@@ -3,6 +3,7 @@ import {
   REGISTRATION_CONFIRMED,
   REGISTRATION_FAILED
 } from './action-names'
+import { combineReducers } from 'redux'
 
 const confirmed = (state = false, action) => {
   switch (action.type) {
@@ -22,12 +23,10 @@ const errors = (state = [], action) => {
   }
 }
 
-const registration = (state = {}, action) => ({
-  confirmed: confirmed(state.confirmed, action),
-  errors: errors(state.errors, action)
+export default combineReducers({
+  confirmed,
+  errors
 })
-
-export default registration
 
 export const $registerUser = data => dispatch => {
   api.registerUser(data).then(result => {
