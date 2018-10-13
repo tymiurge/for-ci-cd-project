@@ -13,7 +13,7 @@ const items = [
   ],
   [
     {placeholder: 'Password', icon: 'lock', type: 'password', fieldBinding: 'pswd', validators: [validation.strIsNotEmpty]},
-    {placeholder: 'Repeat Password', icon: 'lock', type: 'password', fieldBinding: 'pswdDupl', validators: [validation.strIsNotEmpty]}
+    {placeholder: 'Repeat Password', icon: 'lock', type: 'text', fieldBinding: 'pswdDupl', validators: [validation.strIsNotEmpty]}
   ]
 ]
 
