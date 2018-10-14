@@ -6,28 +6,11 @@ import NoSavingsCard from './NoSavingsCard'
 import { screen, controls } from 'components'
 import PropTypes from 'prop-types'
 
-const savings = [
-    {
-        name: 'Bank account',
-        meta: 'Privat bank',
-        amount: 5000
-    },
-    {
-        name: 'Home savings',
-        meta: 'home not touchable',
-        amount: 1000
-    },
-    {
-        name: 'Deposit',
-        meta: 'monobank 1 year deposit',
-        amount: 2000
-    }
-]
-
 class Summary extends React.Component {
   static propTypes = {
     list: PropTypes.array.isRequired,
-    onPageLoad: PropTypes.func.isRequired
+    onPageLoad: PropTypes.func.isRequired,
+    onBucketSave: PropTypes.func.isRequired
   }
 
   state = {
@@ -36,28 +19,6 @@ class Summary extends React.Component {
 
   componentDidMount() {
     this.props.onPageLoad()
-  }
-
-  renderSavings = () => {
-    const { list } = this.props
-    if (this.state.wizardDisplayed) {
-      return [
-        <SavingBucketWizard
-          onSubmit={({name, meta, amount}) => alert(`name=${name}, meta=${meta}, amount=${amount}`)}
-          onCancel={() => this.toggleState()}
-        />,
-        this.props.list.map((item => (
-            <SavingBucket key={item.name} {...item} />
-        )))
-      ]
-    } else if (list.length > 0) {
-      return list.map((item => (
-        <SavingBucket key={item.name} {...item} />
-      )))
-    }
-    return (
-        <NoSavingsCard />
-    )
   }
 
   toggleState = () => this.setState({...this.state, wizardDisplayed: !this.state.wizardDisplayed})
@@ -69,7 +30,27 @@ class Summary extends React.Component {
         <controls.BarsStats incomes={100} savings={200} outcomes={300} />
         <Card.Group>
           {
-              this.renderSavings()
+            this.state.wizardDisplayed &&
+            <SavingBucketWizard
+              onSubmit={
+                data => {
+                  this.setState(
+                    {...this.state, wizardDisplayed: false},
+                    this.props.onBucketSave(data)
+                  )
+                }
+              }
+              onCancel={() => this.toggleState()}
+            />
+          }
+          {
+            this.props.list.map((item => (
+              <SavingBucket key={item.name} {...item} />
+            )))
+          }
+          {
+            this.props.list.length === 0 && !this.state.wizardDisplayed &&
+            <NoSavingsCard />  
           }
         </Card.Group>
         {

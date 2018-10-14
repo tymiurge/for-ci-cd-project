@@ -1,4 +1,5 @@
 import db from './db'
+import uniqid from 'uniqid'
 
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms))
 
@@ -57,6 +58,21 @@ export const fetchBuckets = () => delay(10).then(
       messages: [],
       data: {
         buckets
+      }
+    }
+  }
+)
+
+export const saveBucket = data => delay(10).then(
+  () => {
+    const bucket = {...data, id: uniqid()}
+    //db.buckets.push(bucket)
+    return {
+      status: 'ok',
+      code: 200,
+      messages: [],
+      data: {
+        bucket: bucket
       }
     }
   }
