@@ -3,6 +3,7 @@ import { screen, controls } from 'components'
 import { Container } from 'semantic-ui-react'
 import EntriesTable from './EntriesTable'
 import Toolbar from './Toolbar'
+import PropTypes from 'prop-types'
 
 const entries = [
     {
@@ -54,18 +55,27 @@ const entries = [
 
 class Logs extends React.Component {
 
-    render() {
-        return (
-            <Container>
-                <screen.Header active='logs' />
-                <Toolbar />
-                <controls.BarsStats incomes={5000} outcomes={2800} savings={1000} />
-                <EntriesTable 
-                    entries={entries}
-                />
-            </Container>
-        )
-    }
+  static propTypes = {
+    list: PropTypes.array.isRequired,
+    onPageLoad: PropTypes.func.isRequired
+  }
+
+  componentDidMount() {
+    this.props.onPageLoad()
+  }
+
+  render() {
+    return (
+      <Container>
+        <screen.Header active='logs' />
+        <Toolbar />
+        <controls.BarsStats incomes={5000} outcomes={2800} savings={1000} />
+        <EntriesTable 
+          entries={this.props.list}
+        />
+      </Container>
+    )
+  }
 }
 
 export default Logs
