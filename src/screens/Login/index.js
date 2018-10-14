@@ -4,7 +4,7 @@ import { $loginUser } from './../../reducers/login'
 
 const mapStateToProps = state => ({
   confirmed: state.login.confirmed,
-  //errors: state.login.errors
+  errors: state.login.errors
 })
 
 const mapDispatchToProps = dispatch => ({

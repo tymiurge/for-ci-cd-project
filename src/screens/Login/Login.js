@@ -59,7 +59,7 @@ class Login extends React.Component {
                   <controls.ValidatedInput
                     placeholder={'Email address'}
                     icon='mail'
-                    fiedBinding='login'
+                    fieldBinding='login'
                     validators={[validation.strIsNotEmpty, validation.strIsEmail]}
                     onChange={(value, field, valid = true) => this.onFieldChange(value, field)} 
                   />
@@ -74,6 +74,14 @@ class Login extends React.Component {
                     onChange={(value, field, valid = true) => this.onFieldChange(value, field)} 
                   />
                 </Form.Field>
+                {
+                  this.props.errors.length > 0 &&
+                  this.props.errors.map(error => (
+                    <Message negative>
+                      { error }
+                    </Message>
+                  ))
+                }
                 <Button
                   color='blue'
                   fluid 
