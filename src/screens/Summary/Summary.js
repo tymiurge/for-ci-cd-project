@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, Button, Container } from 'semantic-ui-react'
+import { Card, Button, Container, Message } from 'semantic-ui-react'
 import SavingBucket from './SavingBucket'
 import SavingBucketWizard from './SavingBucketWizard'
 import NoSavingsCard from './NoSavingsCard'
@@ -14,7 +14,8 @@ class Summary extends React.Component {
   }
 
   state = {
-      wizardDisplayed: false
+      wizardDisplayed: false,
+      cannotRemoveWarning: false
   }
 
   componentDidMount() {
@@ -22,6 +23,13 @@ class Summary extends React.Component {
   }
 
   toggleState = () => this.setState({...this.state, wizardDisplayed: !this.state.wizardDisplayed})
+
+  onBucketRemove = amount => {
+    //const bucket = this.props.list.find(item => item.id === id)
+    if (amount !== 0) {
+      this.setState({...this.state, cannotRemoveWarning: true})
+    }
+  }
 
   render() {
     return (
@@ -45,7 +53,11 @@ class Summary extends React.Component {
           }
           {
             this.props.list.map((item => (
-              <SavingBucket key={item.name} {...item} />
+              <SavingBucket
+                key={item.name}
+                {...item}
+                onRemove={id => this.onBucketRemove(id)}
+              />
             )))
           }
           {
@@ -62,6 +74,12 @@ class Summary extends React.Component {
               style={{marginLeft: '1em', marginTop: '1em'}}
               onClick={() => this.toggleState()}
           />
+        }
+        {
+          this.state.cannotRemoveWarning &&
+          <Message negative>
+            <p> Can't remove bucket with positive balance. Make a transfer in the Logs to put this bucket balance into 0</p>
+          </Message>
         }
       </Container>
     )
