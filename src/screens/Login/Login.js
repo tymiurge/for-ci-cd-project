@@ -1,30 +1,46 @@
 import React from 'react'
 import { Button, Form, Grid, Header, Message, Segment } from 'semantic-ui-react'
 import PropTypes from 'prop-types'
+import { controls } from 'components'
+import { validation } from 'utils'
+import { Redirect } from 'react-router-dom'
 
 class Login extends React.Component {
 
   state = {
     login: '',
-    password: ''
+    password: '',
+    valid: true
   }
 
   static propTypes = {
-    onSubmit: PropTypes.func
+    onSubmit: PropTypes.func.isRequired,
+    confirmed: PropTypes.bool.isRequired,
+    errors: PropTypes.array
   }
 
   static defaultProps = {
-    onSubmit: () => {}
+    errors: []
+  }
+
+  onFieldChange = (value, field, valid = true) => {
+    this.setState(
+      {...this.state, [field]: value, valid}
+    )
+  }
+
+  onSubmit = () => {
+    if (this.state.valid) {
+      this.props.onSubmit(this.state)
+    }
   }
 
   render() {
+    if (this.props.confirmed) {
+      return (<Redirect to='/summary' />)
+    }
     return (
       <div className='login-form'>
-        {/*
-          Heads up! The styles below are necessary for the correct render of this example.
-          You can do same with CSS, the main idea is that all the elements up to the `Grid`
-          below must have a height of 100%.
-        */}
         <style>{`
           body > div,
           body > div > div,
@@ -39,32 +55,32 @@ class Login extends React.Component {
             </Header>
             <Form size='large'>
               <Segment>
-                <Form.Input 
-                  fluid 
-                  icon='user' 
-                  iconPosition='left' 
-                  placeholder='E-mail address'
-                  value={this.state.login}
-                  onChange={ e => this.setState({...this.state, login: e.target.value})}
-                />
-                <Form.Input
-                  fluid
-                  icon='lock'
-                  iconPosition='left'
-                  placeholder='Password'
-                  type='password'
-                  value={this.state.password}
-                  onChange={ e => this.setState({...this.state, password: e.target.value})}
-                />
-
+                <Form.Field>
+                  <controls.ValidatedInput
+                    placeholder={'Email address'}
+                    icon='mail'
+                    fiedBinding='login'
+                    validators={[validation.strIsNotEmpty, validation.strIsEmail]}
+                    onChange={(value, field, valid = true) => this.onFieldChange(value, field)} 
+                  />
+                </Form.Field>
+                <Form.Field>
+                  <controls.ValidatedInput
+                    placeholder={'Password'}
+                    type='password'
+                    icon='lock'
+                    fiedBinding='password'
+                    validators={[validation.strIsNotEmpty]}
+                    onChange={(value, field, valid = true) => this.onFieldChange(value, field)} 
+                  />
+                </Form.Field>
                 <Button
                   color='blue'
                   fluid 
                   size='large'
                   content='Login'
-                  onClick={() => this.props.onSubmit(this.state.login, this.state.password)}
+                  onClick={() => this.onSubmit()}
                 />
-                
               </Segment>
             </Form>
             <Message>

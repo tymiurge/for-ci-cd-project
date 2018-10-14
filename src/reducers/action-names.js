@@ -4,3 +4,4 @@ export const REGISTRATION_REQUEST = 'user registration request'
 
 export const REGISTRATION_CONFIRMED = 'registration confirmed'
 export const REGISTRATION_FAILED = 'registration failed'
+export const LOGIN_CONFIRMED = 'user login attempt successfull'

@@ -21,3 +21,16 @@ export const registerUser = data => delay(30).then( () => {
     }
   }
 })
+
+export const loginUser = data => delay(10).then(
+  () => {
+    return {
+      status: 'ok',
+      code: 200,
+      messages: [],
+      data: {
+        confirmed: true
+      }
+    }
+  }
+)
