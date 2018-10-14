@@ -4,6 +4,7 @@ import SavingBucket from './SavingBucket'
 import SavingBucketWizard from './SavingBucketWizard'
 import NoSavingsCard from './NoSavingsCard'
 import { screen, controls } from 'components'
+import PropTypes from 'prop-types'
 
 const savings = [
     {
@@ -24,65 +25,66 @@ const savings = [
 ]
 
 class Summary extends React.Component {
+  static propTypes = {
+    list: PropTypes.array.isRequired,
+    onPageLoad: PropTypes.func.isRequired
+  }
 
-    state = {
-        wizardDisplayed: false
+  state = {
+      wizardDisplayed: false
+  }
+
+  componentDidMount() {
+    this.props.onPageLoad()
+  }
+
+  renderSavings = () => {
+    const { list } = this.props
+    if (this.state.wizardDisplayed) {
+      return [
+        <SavingBucketWizard
+          onSubmit={({name, meta, amount}) => alert(`name=${name}, meta=${meta}, amount=${amount}`)}
+          onCancel={() => this.toggleState()}
+        />,
+        this.props.list.map((item => (
+            <SavingBucket key={item.name} {...item} />
+        )))
+      ]
+    } else if (list.length > 0) {
+      return list.map((item => (
+        <SavingBucket key={item.name} {...item} />
+      )))
     }
+    return (
+        <NoSavingsCard />
+    )
+  }
 
-    renderSavings = () => {
-        
-        if (this.state.wizardDisplayed) {
-            return [
-                <SavingBucketWizard
-                    onSubmit={({name, meta, amount}) => alert(`name=${name}, meta=${meta}, amount=${amount}`)}
-                    onCancel={() => this.toggleState()}
-                />,
-                savings.map((item => (
-                    <SavingBucket key={item.name} {...item} />
-                )))
-            ]
-        } else if (savings.length > 0) {
-            return savings.map((item => (
-                <SavingBucket key={item.name} {...item} />
-            )))
+  toggleState = () => this.setState({...this.state, wizardDisplayed: !this.state.wizardDisplayed})
+
+  render() {
+    return (
+      <Container>
+        <screen.Header active='buckets' />
+        <controls.BarsStats incomes={100} savings={200} outcomes={300} />
+        <Card.Group>
+          {
+              this.renderSavings()
+          }
+        </Card.Group>
+        {
+          !this.state.wizardDisplayed &&
+          <Button
+              circular
+              icon='plus'
+              color='blue'
+              style={{marginLeft: '1em', marginTop: '1em'}}
+              onClick={() => this.toggleState()}
+          />
         }
-        return (
-            <NoSavingsCard />
-        )
-        
-    }
-
-    toggleState = () => this.setState({...this.state, wizardDisplayed: !this.state.wizardDisplayed})
-
-    render() {
-        return (
-            <Container>
-                
-                <screen.Header active='buckets' />
-
-                    <controls.BarsStats incomes={100} savings={200} outcomes={300} />
-                    <Card.Group>
-                        {
-                            this.renderSavings()
-                        }
-                    </Card.Group>
-                    {
-                        !this.state.wizardDisplayed &&
-                        <Button
-                            circular
-                            icon='plus'
-                            color='blue'
-                            style={{marginLeft: '1em', marginTop: '1em'}}
-                            onClick={() => this.toggleState()}
-                        />
-
-                    }
-
-                
-
-            </Container>
-        )
-    }
+      </Container>
+    )
+  }
 }
 
 export default Summary

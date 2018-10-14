@@ -1,3 +1,5 @@
+import db from './db'
+
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms))
 
 export const registerUser = data => delay(30).then( () => {
@@ -41,6 +43,20 @@ export const loginUser = data => delay(10).then(
       messages: [],
       data: {
         confirmed: true
+      }
+    }
+  }
+)
+
+export const fetchBuckets = () => delay(10).then(
+  () => {
+    const buckets = db.buckets
+    return {
+      status: 'ok',
+      code: 200,
+      messages: [],
+      data: {
+        buckets
       }
     }
   }
