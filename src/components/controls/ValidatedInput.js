@@ -50,7 +50,6 @@ class ValidatedInput extends React.Component {
   }
 
   render() {
-    const { type } = this.props
     let _props = Object.assign({
       fluid: true, 
       placeholder: this.props.placeholder,

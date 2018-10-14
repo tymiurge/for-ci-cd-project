@@ -108,8 +108,8 @@ class Register extends React.Component {
                 }
                 {
                   this.props.errors.length > 0 &&
-                  this.props.errors.map(error => (
-                    <Message negative>
+                  this.props.errors.map((error, idx) => (
+                    <Message negative key={idx}>
                       { error }
                     </Message>
                   ))
