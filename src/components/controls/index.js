@@ -1,9 +1,11 @@
 import BarsStats from './BarsStats'
 import ValidatedInput from './ValidatedInput'
+import ProtemVisibility from './ProtemVisibility'
 
 const controls = {
     BarsStats,
-    ValidatedInput
+    ValidatedInput,
+    ProtemVisibility
 }
 
 export default controls
