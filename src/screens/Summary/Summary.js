@@ -77,9 +77,10 @@ class Summary extends React.Component {
         }
         {
           this.state.cannotRemoveWarning &&
-          <Message negative>
-            <p> Can't remove bucket with positive balance. Make a transfer in the Logs to put this bucket balance into 0</p>
-          </Message>
+            <Message negative>
+              <p> Can't remove bucket with positive balance. Make a transfer in the Logs to put this bucket balance into 0</p>
+              <Button onClick={() => this.setState({...this.state, cannotRemoveWarning: false})}>Ok, got it</Button>
+            </Message>
         }
       </Container>
     )
